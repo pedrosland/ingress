@@ -178,7 +178,13 @@ Setting at least one code also enables [proxy_intercept_errors](http://nginx.org
 Example usage: `custom-http-errors: 404,415`
 
 
+**enable-dynamic-tls-records:** Enables dynamically sized TLS records to improve time-to-first-byte. Enabled by default. See [CloudFlare's blog](https://blog.cloudflare.com/optimizing-tls-over-tcp-to-reduce-latency) for more information.
+
+
 **enable-sticky-sessions:**  Enables sticky sessions using cookies. This is provided by [nginx-sticky-module-ng](https://bitbucket.org/nginx-goodies/nginx-sticky-module-ng) module.
+
+
+**enable-spdy:** Enables the SPDY protocol.
 
 
 **enable-vts-status:** Allows the replacement of the default status page with a third party module named [nginx-module-vts](https://github.com/vozlt/nginx-module-vts).
@@ -238,6 +244,9 @@ http://nginx.org/en/docs/http/ngx_http_core_module.html#server_names_hash_bucket
 http://nginx.org/en/docs/hash.html
 
 
+**server-tokens:** Send NGINX Server header in responses and display NGINX version in error pages. Enabled by default.
+
+
 **ssl-buffer-size:** Sets the size of the [SSL buffer](http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_buffer_size) used for sending data.
 The default of 4k helps NGINX to improve TLS Time To First Byte (TTTFB).
 https://www.igvita.com/2013/12/16/optimizing-nginx-tls-time-to-first-byte/
@@ -294,7 +303,7 @@ Default is "true".
 **upstream-fail-timeout:** Sets the time during which the specified number of unsuccessful attempts to communicate with the [server](http://nginx.org/en/docs/http/ngx_http_upstream_module.html#upstream) should happen to consider the server unavailable.
 
 
-**use-gzip:** Enables or disables the use of the nginx module that compresses responses using the ["gzip" module](http://nginx.org/en/docs/http/ngx_http_gzip_module.html)
+**use-gzip:** Enables or disables the use of the nginx module that compresses responses using the ["gzip" module](http://nginx.org/en/docs/http/ngx_http_gzip_module.html).
 The default mime type list to compress is: `application/atom+xml application/javascript aplication/x-javascript application/json application/rss+xml application/vnd.ms-fontobject application/x-font-ttf application/x-web-app-manifest+json application/xhtml+xml application/xml font/opentype image/svg+xml image/x-icon text/css text/plain text/x-component`.
 
 
@@ -318,14 +327,17 @@ The next table shows the options, the default value and a description
 |---------------------------|------|
 |body-size|1m|
 |custom-http-errors|" "|
+|enable-dynamic-tls-records|"true"|
+|enable-spdy|"true"|
 |enable-sticky-sessions|"false"|
 |enable-vts-status|"false"|
 |error-log-level|notice|
-|gzip-types||
+|gzip-types|see use-gzip description above|
 |hsts|"true"|
 |hsts-include-subdomains|"true"|
 |hsts-max-age|"15724800"|
 |keep-alive|"75"|
+|map-hash-bucket-size|"64"|
 |max-worker-connections|"16384"|
 |proxy-connect-timeout|"5"|
 |proxy-read-timeout|"60"|
@@ -334,8 +346,10 @@ The next table shows the options, the default value and a description
 |retry-non-idempotent|"false"|
 |server-name-hash-bucket-size|"64"|
 |server-name-hash-max-size|"512"|
+|server-tokens|true|
 |ssl-buffer-size|4k|
 |ssl-ciphers||
+|ssl-dh-param|value from openssl|
 |ssl-protocols|TLSv1 TLSv1.1 TLSv1.2|
 |ssl-session-cache|"true"|
 |ssl-session-cache-size|10m|
